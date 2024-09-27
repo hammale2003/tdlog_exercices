@@ -1,30 +1,41 @@
-"""
-Complete the solution so that it returns true if the first argument(string)
-passed in ends with the 2nd argument (also a string).
+# Solution pour le problème
 
-Examples:
+def solution(string, ending):
+    return string.endswith(ending)
 
-    solution('abc', 'bc') # returns true
-    solution('abc', 'd') # returns false
-"""
+# Cas de tests unitaires basés sur les exemples fournis
 
-"""
-Create unit test using those cases:
-fixed_tests_True = (
-    ( "samurai", "ai"    ),
-    ( "ninja",   "ja"    ),
-    ( "sensei",  "i"     ),
-    ( "abc",     "abc"   ),
-    ( "abcabc",  "bc"    ),
-    ( "fails",   "ails"  ),
-)
+import unittest
 
-fixed_tests_False = (
-    ( "sumo",    "omo"   ),
-    ( "samurai", "ra"    ),
-    ( "abc",     "abcd"  ),
-    ( "ails",    "fails" ),
-    ( "this",    "fails" ),
-    ( "spam",    "eggs"  )
-)
-"""
+class TestSolution(unittest.TestCase):
+    
+    # Tests qui devraient retourner True
+    def test_true_cases(self):
+        fixed_tests_True = (
+            ("samurai", "ai"),
+            ("ninja",   "ja"),
+            ("sensei",  "i"),
+            ("abc",     "abc"),
+            ("abcabc",  "bc"),
+            ("fails",   "ails"),
+        )
+        for string, ending in fixed_tests_True:
+            with self.subTest(string=string, ending=ending):
+                self.assertTrue(solution(string, ending))
+    
+    # Tests qui devraient retourner False
+    def test_false_cases(self):
+        fixed_tests_False = (
+            ("sumo",    "omo"),
+            ("samurai", "ra"),
+            ("abc",     "abcd"),
+            ("ails",    "fails"),
+            ("this",    "fails"),
+            ("spam",    "eggs"),
+        )
+        for string, ending in fixed_tests_False:
+            with self.subTest(string=string, ending=ending):
+                self.assertFalse(solution(string, ending))
+
+# Exécution des tests
+unittest.TextTestRunner().run(unittest.TestLoader().loadTestsFromTestCase(TestSolution))
